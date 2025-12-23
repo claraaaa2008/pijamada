@@ -1,0 +1,458 @@
+:root {
+    /** Colores **/
+    /** Fondos **/
+    --color-bg-primary: #FFF7F9;
+    --color-bg-secondary: #FFFFFF;
+
+    /** Marca **/
+    --color-brand-pink: #F2B6C6;
+    --color-brand-lilac: #C6B7E2;
+
+    /** Textos **/
+    --color-text-primary: #2F2F2F;
+    --color-text-secondary: #6B6B6B;
+
+    /** Detalles **/
+    --color-detail-gold: #EAD7A1;
+    --color-detail-gold-darker: #96824a;
+
+    /** Bordes **/
+    --color-border-soft: #E8DDE2;
+
+    /** Estados **/
+    --color-state-hover: #E9A9BB;
+    --color-state-active: #D17C8F;
+
+    /** Fuentes **/
+    --font-primary: 'Fustat', sans-serif;
+    --font-secondary: 'Poppins', sans-serif;
+    --font-third: 'Manjari', sans-serif;
+    --font-fourth: 'Inter', sans-serif;
+
+    /** Gradientes **/
+    --gradient-alpha: 0.257;
+    --gradient-base: linear-gradient(to top, rgba(242, 182, 198, 1), rgba(242, 182, 198, var(--gradient-alpha)), rgba(255, 255, 255, 0));
+}
+
+
+* {
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    font-family: var(--font-primary);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 32px;
+    padding-block: 20px;
+} header h1 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 32px;
+}
+
+section {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 224, 251, 1) 33%, rgba(255, 255, 255, 1) 70%, rgb(255, 249, 191) 100%);
+    padding-inline: 24px;
+    padding-block: 122px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+} section p {
+    font-family: var(--font-secondary);
+    color: var(--color-text-secondary);
+    letter-spacing: -0.3px;
+    font-weight: 500;
+    font-size: 22px;
+} section h2 {
+    font-family: var(--font-third);
+    font-weight: 700;
+    font-size: 48px;
+} section .h2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+} section .contentHero {
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+section button {
+    background-color: var(--color-brand-pink);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 12px;
+    font-family: var(--font-fourth);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+} section button:hover {
+    background-color: var(--color-state-hover);
+    font-size: 15px;
+} section button:active {
+    background-color: var(--color-state-active);
+} section button a {
+    text-decoration: none;
+}
+
+main {
+    padding-block: 62px;
+    text-align: center;
+    padding-inline: 12px;
+} main h2 {
+    font-family: var(--font-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 24px;
+} main .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(335px, 1fr));
+    gap: 18px;
+    margin-top: 32px;
+} .card {
+    transform: scale(1);
+    display: flex;
+    align-self: center;
+
+    background-size: cover;
+    background-position: center;
+
+    height: 479px;
+
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 12px;
+    
+    overflow: hidden;
+    align-self: center;
+    transition: transform 0.3s ease;
+
+    position: relative;
+    
+    opacity: 0;
+}
+
+.card.visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.card.hidden {
+    animation: fadeOutDown 0.6s ease-out forwards;
+}
+
+/* overlay sólido rosa cuando la tarjeta tiene la clase .overlay-pink */
+.card.overlay-pink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(242, 182, 198, 0.8); /* --color-brand-pink con transparencia (ajustable) */
+    pointer-events: none; /* que no interfiera con clicks */
+    transition: background 0.3s ease-in;
+    z-index: 1;
+}
+
+/* asegurar que el título, la lista y el botón queden por encima de la overlay */
+.card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.card ol {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.6s ease-in-out, max-height 0.6s ease-in-out;
+}
+
+.card ol.content-visible {
+    opacity: 1;
+    max-height: 500px;
+}
+
+.card ol li {
+    text-align: left;
+}
+
+.card h4 {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.card button {
+    background-color: transparent;
+    border: 1px solid var(--color-detail-gold-darker);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: var(--font-fourth);
+    font-weight: 500;
+    font-size: 14px;
+    transform: scale(1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+} .card button:hover {
+    background-color: var(--color-detail-gold-darker);
+    color: var(--color-bg-secondary);
+} .card button:active {
+    background-color: var(--color-detail-gold);
+    border: 1px solid var(--color-detail-gold);
+} .card button a {
+    text-decoration: none;
+}
+
+
+footer {
+    border-top: var(--color-border-soft) 1px solid;
+    padding-inline: 64px;
+    padding-block: 60px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+    gap: 70px;
+} 
+
+footer .nav {
+    display: inline-flex;
+    gap: 20px;
+} footer .nav ul li {
+    list-style: none;
+    color: var(--color-text-secondary);
+    font-family: var(--font-third);
+    margin-bottom: 6px;
+} footer .nav ul {
+    padding: 0;
+} footer .nav h5 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+footer .content p {
+    font-family: var(--font-secondary);
+    font-weight: 450;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    margin-bottom: 36px;
+} footer .content h3 {
+    margin-bottom: 6px;
+}
+
+/** Fotos de cada una **/
+#aldu {
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/aldu.jpg");
+    image-rendering: optimizeQuality;
+} #aldu:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/aldu.jpg");
+}
+
+#ambar {
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/ambar.jpg");
+} #ambar:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/ambar.jpg");
+}
+
+#clara {
+    background-position-y: bottom;
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/clara.jpg");
+} #clara:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/clara.jpg");
+}
+
+#luli {
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/luli2.jpg");
+} #luli:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/luli2.jpg");
+}
+
+#mar {
+    background-position-y: top;
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/mar1.jpg");
+    transition: all 0.3s ease;
+} #mar:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/mar1.jpg");
+}
+
+#miel {
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/miel.jpg");
+} #miel:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/miel.jpg");
+}
+
+#sam {
+    background-position-y: bottom;
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sam2.jpg");
+} #sam:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sam2.jpg");
+}
+
+#sofip {
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sofiP1.jpg");
+} #sofip:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.657),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sofiP1.jpg");
+}
+
+#sofis {
+    background-position-y: bottom;
+    background-image:
+    linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.257),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sofiS.jpg");
+} #sofis:hover {
+    background-image: linear-gradient(
+        to top,
+        rgba(242, 182, 198, 100),
+        rgba(242, 182, 198, 0.473),
+        rgba(255, 255, 255, 0)
+    ),
+    url("../img/sofiS.jpg");
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
